@@ -1,7 +1,20 @@
 #!/usr/bin/env bash
 
-sh /usr/share/examples/bhyve/vmrun.sh \
-    -t tap0 \
-    -d /usr/home/alex/workspace/vms/disk.img \
-    -I /usr/home/alex/workspace/vms/FreeBSD-11.2-RELEASE-amd64-bootonly.iso \
-    freebsd
+bhyveload \
+	-c stdio \
+	-m 512M \
+	-d FreeBSD-11.2-RELEASE-amd64-bootonly.iso \
+	freebsd
+
+bhyve \
+	-c 2 \
+	-m 512M \
+	-HAP \
+	-s 0,hostbridge \
+	-s 1,lpc \
+	-s 2,virtio-net,tap0 \
+	-s 3,virtio-blk,disk.img \
+	-s 4,ahci-cd,FreeBSD-11.2-RELEASE-amd64-bootonly.iso \
+	-l com1,stdio \
+	freebsd
+
