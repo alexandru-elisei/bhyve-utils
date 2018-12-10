@@ -6,6 +6,10 @@ bhyveload \
 	-d FreeBSD-11.2-RELEASE-amd64-bootonly.iso \
 	freebsd
 
+if [[ "$?" != "0" ]]; then
+	exit 1
+fi
+
 bhyve \
 	-c 2 \
 	-m 512M \
@@ -18,3 +22,4 @@ bhyve \
 	-l com1,stdio \
 	freebsd
 
+bhyvectl --destroy --vm=grub_bhyve
