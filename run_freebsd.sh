@@ -38,3 +38,4 @@ bhyve \
 	freebsd
 
 bhyvectl --destroy --vm=freebsd
+
