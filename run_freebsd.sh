@@ -22,4 +22,4 @@ bhyve \
 	-l com1,stdio \
 	freebsd
 
-bhyvectl --destroy --vm=grub_bhyve
+bhyvectl --destroy --vm=freebsd
